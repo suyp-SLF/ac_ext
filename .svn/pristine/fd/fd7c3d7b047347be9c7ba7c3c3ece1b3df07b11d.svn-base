@@ -1,0 +1,55 @@
+package aeac.sys.aeac_basetemple.utils;
+
+import kd.bos.dataentity.entity.LocaleString;
+import kd.bos.form.control.AttachBtnOption;
+import kd.bos.form.control.AttachmentPanel;
+import kd.bos.form.control.Control;
+import kd.bos.form.control.events.AttachmentOperaClickEvent;
+import kd.bos.form.control.events.AttachmentOperaClickListener;
+import kd.bos.form.field.AttachmentEdit;
+import kd.bos.form.plugin.AbstractFormPlugin;
+
+import java.util.ArrayList;
+import java.util.EventObject;
+import java.util.List;
+import java.util.Map;
+
+public class UploadFileFormPlugin extends AbstractFormPlugin implements AttachmentOperaClickListener {
+    private static final String KEY_ATTACHMENTPENAL = "attachmentfield";
+
+    @Override
+    public void registerListener(EventObject e) {
+        AttachmentEdit panel = this.getControl(KEY_ATTACHMENTPENAL);
+        panel.addOperaClickListener(this);;
+    }
+
+    @Override
+    public void afterCreateNewData(EventObject e) {
+        super.afterCreateNewData(e);
+        AttachmentEdit panel = this.getControl(KEY_ATTACHMENTPENAL);
+
+        List<AttachBtnOption> btns = new ArrayList<AttachBtnOption>();
+        panel.getAttachmentModel();
+        btns.add(new AttachBtnOption("attoption_1", new LocaleString("分享")));
+        btns.add(new AttachBtnOption("attoption_2", new LocaleString("打印")));
+        panel.addAttachOperaBtn(btns );
+    }
+
+    @Override
+    public void attachmentOperaClick(AttachmentOperaClickEvent e) {
+        AttachmentEdit panel = (AttachmentEdit) e.getSource();
+        Map<String, String> attinfo = (Map<String, String>) e.getAttachmentInfo();
+//        List<Map<String, Object>> atts = panel.getAttachmentData();
+//        Map<String, Object> att = null;
+//        for (Map<String, Object> map : atts) {
+//            String uid = (String) map.get("uid");
+//            if (uid.equals(attinfo.get("uid"))) {
+//                att = map;
+//                continue;
+//            }
+//        }
+//        if ("attoption_1".contentEquals(e.getOperaKey())) {
+//            System.out.println("分享附件："+att.get("name")+att.get("url"));
+//        }
+    }
+}

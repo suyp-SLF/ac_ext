@@ -1,0 +1,72 @@
+package aeac.sys.aeac_basetemple.utils;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Date;
+import java.util.EventObject;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+import kd.bos.context.RequestContext;
+import kd.bos.ext.form.control.CustomControl;
+import kd.bos.form.control.Toolbar;
+import kd.bos.form.control.events.ItemClickEvent;
+import kd.bos.form.plugin.AbstractFormPlugin;
+
+public class ShushengFormPlugin extends AbstractFormPlugin{
+	@Override
+	public void registerListener(EventObject e) {
+	    super.registerListener(e);
+	    Toolbar repairDataBtnBar = this.getControl("aeac_toolbarap");
+	    repairDataBtnBar.addItemClickListener(this);
+	}
+	@Override
+    public void afterCreateNewData(EventObject e) {
+    	// TODO Auto-generated method stub
+    	super.afterCreateNewData(e);
+    	
+    	
+       
+    	updateTable("start");
+    }
+	
+	@Override
+	public void itemClick(ItemClickEvent evt) {
+		
+		//获得当前系统的租户id 账户id
+		// TODO Auto-generated method stub
+		String key = evt.getItemKey();
+		super.itemClick(evt);
+		updateTable(key);
+	}
+	
+	private void updateTable(String action) {
+		
+		if("start".equalsIgnoreCase(action)) {
+			CustomControl customcontrol = this.getView().getControl("aeac_customcontrolap");
+	        Map<String, Object> data = new HashMap<>();
+	        
+	        String path = this.getView().getFormShowParameter().getCustomParam("filepath");
+	        this.getModel().setValue("aeac_path", path);
+	        data.put("LOD_path", path);
+	        data.put("LOD_action", "start");
+	        data.put("id", UUID.randomUUID());
+	        customcontrol.setData(data);
+	        
+		}else if("aeac_view".equalsIgnoreCase(action)) {
+			
+			CustomControl customcontrol = this.getView().getControl("aeac_customcontrolap");
+	        Map<String, Object> data = new HashMap<>();
+	        
+	        String path = this.getView().getFormShowParameter().getCustomParam("filepath");
+	        this.getModel().setValue("aeac_path", path);
+	        data.put("LOD_path", path);
+	        data.put("LOD_action", "view");
+	        data.put("id", UUID.randomUUID());
+	        customcontrol.setData(data);
+		}
+	}
+}
