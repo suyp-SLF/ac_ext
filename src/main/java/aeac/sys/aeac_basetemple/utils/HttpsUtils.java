@@ -67,7 +67,7 @@ public class HttpsUtils {
 		 		"        <attributes>\r\n" + 
 		 		"            <attr name=\"dnname\" namespace=\"http://www.jit.com.cn/cinas/ias/ns/saml/saml11/X.509\">CN=岳旭平,T=yxp,OU=00,O=NORINCO,C=cn</attr>\r\n" + 
 		 		"        </attributes>\r\n" + 
-		 		"        <token>26279e73-faea-45f5-add3-16aee56ec49f</token>\r\n" + 
+		 		"        <token>*******-****-****-****-************</token>\r\n" + 
 		 		"    </body>\r\n" + 
 		 		"</message>";
 //		 SAXReader reader = new SAXReader();
